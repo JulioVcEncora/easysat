@@ -3,7 +3,6 @@ package com.encora.easysat.application;
 import com.encora.easysat.domain.model.AcuseResponse;
 import com.encora.easysat.domain.model.ValidationRequest;
 import com.encora.easysat.infrastructure.SatClient;
-import com.example.consumingwebservice.wsdl.Consulta;
 import com.example.consumingwebservice.wsdl.ConsultaResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +30,7 @@ public class ValidationController {
             request.getTotal(),
             request.getUuid());
 
-    return satClient.toAcuseReponse(response);
+    return satClient.toAcuseResponse(response);
     }
 
 

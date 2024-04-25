@@ -6,6 +6,8 @@ import com.example.consumingwebservice.wsdl.Consulta;
 import com.example.consumingwebservice.wsdl.ConsultaResponse;
 import com.example.consumingwebservice.wsdl.ObjectFactory;
 import jakarta.xml.bind.JAXBElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 
@@ -13,6 +15,7 @@ import org.springframework.ws.soap.client.core.SoapActionCallback;
 public class SatClient extends WebServiceGatewaySupport {
 
     private final AcuseResponseDTO acuseResponseDTO;
+    private static final Logger log = LoggerFactory.getLogger(SatClient.class);
 
     public SatClient() {
         this.acuseResponseDTO = new AcuseResponseDTO();
@@ -25,6 +28,8 @@ public class SatClient extends WebServiceGatewaySupport {
                 total,
                 uuid);
 
+        log.info("Requesting consulta for: " + soapRequest);
+
         ObjectFactory factory = new ObjectFactory();
         Consulta consulta = factory.createConsulta();
         JAXBElement<String> jaxbElement = factory.createConsultaExpresionImpresa(soapRequest);
@@ -36,7 +41,7 @@ public class SatClient extends WebServiceGatewaySupport {
                                 "http://tempuri.org/IConsultaCFDIService/Consulta"));
     }
 
-    public AcuseResponse toAcuseReponse(ConsultaResponse response) {
+    public AcuseResponse toAcuseResponse(ConsultaResponse response) {
         return acuseResponseDTO.toAcuseResponse(response);
     }
 
