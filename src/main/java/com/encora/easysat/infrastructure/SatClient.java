@@ -6,15 +6,17 @@ import com.example.consumingwebservice.wsdl.Consulta;
 import com.example.consumingwebservice.wsdl.ConsultaResponse;
 import com.example.consumingwebservice.wsdl.ObjectFactory;
 import jakarta.xml.bind.JAXBElement;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 
 
 public class SatClient extends WebServiceGatewaySupport {
 
-    @Autowired
-    private AcuseResponseDTO acuseResponseDTO;
+    private final AcuseResponseDTO acuseResponseDTO;
+
+    public SatClient() {
+        this.acuseResponseDTO = new AcuseResponseDTO();
+    }
 
     public ConsultaResponse getConsulta(String rfc_emitter, String rfc_receiver, String total, String uuid) {
         String soapRequest = String.format("?re=%s&rr=%s&tt=%s&id=%s",
