@@ -1,0 +1,26 @@
+version: '1'
+services:
+  easysat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+      - "8080:8080"
+      - "6000:6000"
+    depends_on:
+      - rabbitmq
+    networks:
+      - easysat
+  rabbitmq:
+      image: "rabbitmq:3.13-management"
+      environment:
+        - RABBITMQ_DEFAULT_USER=juliovillalvazo
+        - RABBITMQ_DEFAULT_PASS=secure-pass-word-3-!
+      ports:
+        - "5672:5672"
+        - "15672:15672"
+      networks:
+        - easysat
+networks:
+  easysat:

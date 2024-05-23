@@ -1,6 +1,6 @@
 package com.encora.easysat.application;
 
-import com.encora.easysat.domain.model.AcuseResponse;
+import com.encora.easysat.domain.model.AcuseResponseDTO;
 import com.encora.easysat.domain.model.ValidationRequest;
 import com.encora.easysat.infrastructure.SatClient;
 import com.example.consumingwebservice.wsdl.ConsultaResponse;
@@ -21,7 +21,7 @@ public class ValidationController {
     }
 
     @PostMapping("/validate")
-    public AcuseResponse validate(@RequestBody ValidationRequest request) {
+    public AcuseResponseDTO validate(@RequestBody ValidationRequest request) {
 
     ConsultaResponse response = satClient
         .getConsulta(
@@ -32,6 +32,4 @@ public class ValidationController {
 
     return satClient.toAcuseResponse(response);
     }
-
-
 }

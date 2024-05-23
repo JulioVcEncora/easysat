@@ -1,7 +1,7 @@
 package com.encora.easysat.infrastructure;
 
-import com.encora.easysat.domain.presentation.AcuseResponseDTO;
-import com.encora.easysat.domain.model.AcuseResponse;
+import com.encora.easysat.domain.presentation.AcuseResponseMapper;
+import com.encora.easysat.domain.model.AcuseResponseDTO;
 import com.example.consumingwebservice.wsdl.Consulta;
 import com.example.consumingwebservice.wsdl.ConsultaResponse;
 import com.example.consumingwebservice.wsdl.ObjectFactory;
@@ -13,12 +13,11 @@ import org.springframework.ws.soap.client.core.SoapActionCallback;
 
 
 public class SatClient extends WebServiceGatewaySupport {
-
-    private final AcuseResponseDTO acuseResponseDTO;
+    private final AcuseResponseMapper acuseResponseDTO;
     private static final Logger log = LoggerFactory.getLogger(SatClient.class);
 
     public SatClient() {
-        this.acuseResponseDTO = new AcuseResponseDTO();
+        this.acuseResponseDTO = new AcuseResponseMapper();
     }
 
     public ConsultaResponse getConsulta(String rfc_emitter, String rfc_receiver, String total, String uuid) {
@@ -41,7 +40,7 @@ public class SatClient extends WebServiceGatewaySupport {
                                 "http://tempuri.org/IConsultaCFDIService/Consulta"));
     }
 
-    public AcuseResponse toAcuseResponse(ConsultaResponse response) {
+    public AcuseResponseDTO toAcuseResponse(ConsultaResponse response) {
         return acuseResponseDTO.toAcuseResponse(response);
     }
 

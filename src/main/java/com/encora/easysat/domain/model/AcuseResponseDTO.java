@@ -3,7 +3,7 @@ package com.encora.easysat.domain.model;
 import lombok.Data;
 
 @Data
-public class AcuseResponse {
+public class AcuseResponseDTO {
     private String codigoEstatus;
     private String esCancelable;
     private String estado;
